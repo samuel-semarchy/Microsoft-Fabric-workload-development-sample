@@ -13,6 +13,7 @@ import {
 import * as Controller from './controller/SampleWorkloadController';
 import { getJobDetailsPane } from './utils';
 import i18next from 'i18next';
+import { ItemCreationFailureData, ItemCreationSuccessData } from './models/SampleWorkloadModel';
 
 export async function initialize(params: InitParams) {
     const workloadClient = createWorkloadClient();
@@ -41,6 +42,24 @@ export async function initialize(params: InitParams) {
                         hasCloseButton: false
                     },
                 });
+
+             case 'item.onCreationSuccess':
+                const { item: createdItem } = data as ItemCreationSuccessData;
+                await workloadClient.navigation.navigate('host', {
+                    path: `/groups/${createdItem.folderObjectId}/${createdItem.itemType}/${createdItem.objectId}`,
+                });
+
+                return Promise.resolve({ succeeded: true });
+
+            case 'item.onCreationFailure':
+                const failureData = data as ItemCreationFailureData;
+                await workloadClient.notification.open(
+                    {
+                        title: 'Error creating item',
+                        notificationType: NotificationType.Error,
+                        message: `Failed to create item, error code: ${failureData.errorCode}, result code: ${failureData.resultCode}`
+                    });
+                return;
 
             /**
              * This opens the Frontend-only experience, allowing to experiment with the UI without the need for CRUD operations.

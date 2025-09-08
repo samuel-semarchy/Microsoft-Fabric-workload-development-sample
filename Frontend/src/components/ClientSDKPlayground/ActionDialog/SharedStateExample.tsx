@@ -30,7 +30,7 @@ export function SharedStateExample(props: TabContentProps) {
             workloadClient);
 
         if (localSharedStateMessage != sharedState.message) {
-            dispatch(setLocalSharedStateMessage(localSharedStateMessage));
+            dispatch(setLocalSharedStateMessage(sharedState.message));
         }
     }
 

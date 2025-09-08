@@ -263,7 +263,8 @@ export function SampleWorkloadEditor(props: PageProps) {
           return;
         }
         console.error(
-          `Error loading the Item (object ID:${pageContext.itemObjectId}`,
+          'Error loading the Item - objectID: %s',
+          pageContext.itemObjectId,
           error
         );
       }

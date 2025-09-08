@@ -2,6 +2,7 @@
     "name": "SampleWorkloadItem",
     "displayName": "Item_1_DisplayName",
     "displayNamePlural": "Item_1_DisplayName_Plural",
+    "version": "1.100",
     "editor": {
       "path": "/sample-workload-editor"
     },
@@ -79,5 +80,12 @@
       "canDestroy": "sample.tab.canDestroy",
       "onDestroy": "sample.tab.onDestroy",
       "onDelete": "sample.tab.onDelete"
-    }
+    },
+    "createItemDialogConfig": {
+      "onCreationFailure": { "action": "item.onCreationFailure" },
+      "onCreationSuccess": { "action": "item.onCreationSuccess" }
+    },
+    "oneLakeCatalogCategory": [
+      "Process"
+    ]
   }

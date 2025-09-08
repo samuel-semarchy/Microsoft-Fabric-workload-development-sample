@@ -73,7 +73,7 @@ export function MessageBoxExample(props: TabContentProps) {
                 />
             </Field>
             <Tooltip
-                content="Link must start with 'https://', and can't be window's origin or belong to one of Fabric's known domains (such as 'powerbi.com', 'fabric.microsoft.com' or 'windows.net')"
+                content="Link must start with 'https://', and can't be window's origin or belong to one of Fabric's known domains (such as 'powerbi.com', 'fabric.microsoft.com' or 'analysis.windows.net')"
                 relationship="label"
             >
                 <Field
