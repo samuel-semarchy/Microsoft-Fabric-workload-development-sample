@@ -1,5 +1,6 @@
 {
     "name": "Product",
+    "version": "1.100",
     "displayName": "Workload_Display_Name",
     "fullDisplayName": "Workload_Full_Display_Name",
     "description": "Workload_Description",
@@ -80,6 +81,27 @@
             "workspace-plus-new-teams"
           ],
           "itemType": "SampleWorkloadItem"
+        },
+        {
+          "title": "CreateHub_Card_2_Title",
+          "description": "CreateHub_Card_2_Description",
+          "icon": {
+            "name": "assets/images/dial.png"
+          },
+          "icon_small": {
+            "name": "assets/images/dial.png"
+          },
+          "availableIn": [
+            "home",
+            "create-hub",
+            "workspace-plus-new",
+            "workspace-plus-new-teams"
+          ],
+          "itemType": "SampleWorkloadItem",
+          "createItemDialogConfig": {
+            "onCreationFailure": { "action": "item.onCreationFailure" },
+            "onCreationSuccess": { "action": "item.onCreationSuccess" }
+          }
         }
       ]
     },

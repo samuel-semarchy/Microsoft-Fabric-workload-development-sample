@@ -1,4 +1,4 @@
-import { WorkloadClientAPI } from '@ms-fabric/workload-client';
+import { ItemLikeV2, WorkloadClientAPI } from '@ms-fabric/workload-client';
 
 // Represents an item as defined in the frontend manifest.
 export interface ItemManifest {
@@ -65,4 +65,13 @@ export interface TabContentProps {
     workloadClient: WorkloadClientAPI;
     sampleWorkloadName?: string;
     sampleItem?: WorkloadItem<ItemPayload>;
+}
+
+export interface ItemCreationFailureData {
+    errorCode?: string;
+    resultCode?: string;
+}
+
+export interface ItemCreationSuccessData {
+    item: ItemLikeV2;
 }

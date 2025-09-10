@@ -41,8 +41,7 @@ if (-not $applicationName) {
 if (-not $workloadName) {
     $workloadName = Read-Host "Enter your workload name"
 }
-while (-not ($workloadName -match "^Org\.[^.]+$"))
-{
+while (-not ($workloadName -match "^Org\.[^.]+$")) {
     $workloadName = Read-Host "Workload name must start with Org. and contain only 2 segments!. please re-enter your workload name"
 }
 if (-not $tenantId) {
@@ -74,172 +73,172 @@ $randomString = -join ((65..90) + (97..122) | Get-Random -Count $length | ForEac
 $applicationIdUri = "api://localdevinstance/" + $tenantId + "/" + $workloadName + "/" + $randomString
 
 $application = @{
-    displayName = $applicationName
-    signInAudience = "AzureADMultipleOrgs"
-    optionalClaims = @{
+    displayName            = $applicationName
+    signInAudience         = "AzureADMultipleOrgs"
+    optionalClaims         = @{
         accessToken = @(
             @{
                 essential = $false
-                name = "idtyp"
+                name      = "idtyp"
             }
         )
     }
-    spa = @{
+    spa                    = @{
         redirectUris = @(
             $redirectUri
         )
     }
-    identifierUris = @($applicationIdUri)
-    api = @{
-        oauth2PermissionScopes = @( # Scopes
+    identifierUris         = @($applicationIdUri)
+    api                    = @{
+        oauth2PermissionScopes    = @( # Scopes
             @{
                 adminConsentDisplayName = "FabricWorkloadControl"
                 adminConsentDescription = "FabricWorkloadControl"
-                value = "FabricWorkloadControl"
-                id = $FabricWorkloadControlGuid
-                isEnabled = $true
-                type = "User"
+                value                   = "FabricWorkloadControl"
+                id                      = $FabricWorkloadControlGuid
+                isEnabled               = $true
+                type                    = "User"
             },
             @{
                 adminConsentDisplayName = "Item1.Read.All"
                 adminConsentDescription = "Item1.Read.All"
-                value = "Item1.Read.All"
-                id = $Item1ReadAllGuid
-                isEnabled = $true
-                type = "User"
+                value                   = "Item1.Read.All"
+                id                      = $Item1ReadAllGuid
+                isEnabled               = $true
+                type                    = "User"
             },
             @{
                 adminConsentDisplayName = "Item1.ReadWrite.All"
                 adminConsentDescription = "Item1.ReadWrite.All"
-                value = "Item1.ReadWrite.All"
-                id = $Item1ReadWriteAllGuid
-                isEnabled = $true
-                type = "User"
+                value                   = "Item1.ReadWrite.All"
+                id                      = $Item1ReadWriteAllGuid
+                isEnabled               = $true
+                type                    = "User"
             },
             @{
                 adminConsentDisplayName = "FabricLakehouse.Read.All"
                 adminConsentDescription = "FabricLakehouse.Read.All"
-                value = "FabricLakehouse.Read.All"
-                id = $FabricLakehouseReadAllGuid
-                isEnabled = $true
-                type = "User"
+                value                   = "FabricLakehouse.Read.All"
+                id                      = $FabricLakehouseReadAllGuid
+                isEnabled               = $true
+                type                    = "User"
             },
             @{
                 adminConsentDisplayName = "FabricLakehouse.ReadWrite.All"
                 adminConsentDescription = "FabricLakehouse.ReadWrite.All"
-                value = "FabricLakehouse.ReadWrite.All"
-                id = $FabricLakehouseReadWriteAllGuid
-                isEnabled = $true
-                type = "User"
+                value                   = "FabricLakehouse.ReadWrite.All"
+                id                      = $FabricLakehouseReadWriteAllGuid
+                isEnabled               = $true
+                type                    = "User"
             },
             @{
                 adminConsentDisplayName = "KQLDatabase.ReadWrite.All"
                 adminConsentDescription = "KQLDatabase.ReadWrite.All"
-                value = "KQLDatabase.ReadWrite.All"
-                id = $KQLDatabaseReadWriteAllGuid
-                isEnabled = $true
-                type = "User"
+                value                   = "KQLDatabase.ReadWrite.All"
+                id                      = $KQLDatabaseReadWriteAllGuid
+                isEnabled               = $true
+                type                    = "User"
             },
             @{
                 adminConsentDisplayName = "FabricEventhouse.Read.All"
                 adminConsentDescription = "FabricEventhouse.Read.All"
-                value = "FabricEventhouse.Read.All"
-                id = $FabricEventhouseReadAllGuid
-                isEnabled = $true
-                type = "User"
+                value                   = "FabricEventhouse.Read.All"
+                id                      = $FabricEventhouseReadAllGuid
+                isEnabled               = $true
+                type                    = "User"
             }
         )
         preAuthorizedApplications = @( # Preauthorize
             @{
-                appId = "871c010f-5e61-4fb1-83ac-98610a7e9110"
+                appId                  = "871c010f-5e61-4fb1-83ac-98610a7e9110"
                 delegatedPermissionIds = @(
                     $Item1ReadAllGuid, $Item1ReadWriteAllGuid, $FabricLakehouseReadAllGuid, $FabricLakehouseReadWriteAllGuid, $KQLDatabaseReadWriteAllGuid, $FabricEventhouseReadAllGuid
                 )
             },
-             @{
-                appId = "00000009-0000-0000-c000-000000000000"
+            @{
+                appId                  = "00000009-0000-0000-c000-000000000000"
                 delegatedPermissionIds = @(
                     $FabricWorkloadControlGuid
                 )
             },
             @{
-                appId = "d2450708-699c-41e3-8077-b0c8341509aa"
+                appId                  = "d2450708-699c-41e3-8077-b0c8341509aa"
                 delegatedPermissionIds = @(
                     $FabricWorkloadControlGuid
                 )
             }
         )
     }
-     requiredResourceAccess = @( # API Permissions
-            @{
-                resourceAppId = "e406a681-f3d4-42a8-90b6-c2b029497af1" # Azure Storage
-                resourceAccess = @(
-                    @{
-                        id = "03e0da56-190b-40ad-a80c-ea378c433f7f" # user_impersonation
-                        type = "Scope"
-                    }
-                )
-            },
-            @{
-                resourceAppId = "2746ea77-4702-4b45-80ca-3c97e680e8b7" # Azure Data Explorer
-                resourceAccess = @(
-                    @{
-                        id = "00d678f0-da44-4b12-a6d6-c98bcfd1c5fe" # user_impersonation
-                        type = "Scope"
-                    }
-                )
-            },
-            @{
-                resourceAppId = "00000003-0000-0000-c000-000000000000" # Graph
-                resourceAccess = @(
-                    @{
-                        id = "e1fe6dd8-ba31-4d61-89e7-88639da4683d" # User.Read
-                        type = "Scope"
-                    }
-                )
-            },
-            @{
-                resourceAppId = "00000009-0000-0000-c000-000000000000" # PBI Service
-                resourceAccess = @(
-                    @{
-                        id = "7ba630b9-8110-4e27-8d17-81e5f2218787" # Fabric.Extend
-                        type = "Scope"
-                    },
-                    @{
-                        id = "b2f1b2fa-f35c-407c-979c-a858a808ba85" # Workspace.Read.All
-                        type = "Scope"
-                    },
-                    @{
-                        id = "caf40b1a-f10e-4da1-86e4-5fda17eb2b07" # Item.Execute.ALL
-                        type = "Scope"
-                    },
-                    @{
-                        id = "d2bc95fc-440e-4b0e-bafd-97182de7aef5" # Item.Read.All
-                        type = "Scope"
-                    },
-                    @{
-                        id = "7a27a256-301d-4359-b77b-c2b759d2e362" # Item.ReadWrite.All
-                        type = "Scope"
-                    },
-                    @{
-                        id = "02e8d710-956c-4760-b996-2e83935c2cf5" # Item.Reshare.All
-                        type = "Scope"
-                    },
-                    @{
-                        id = "13060bfd-9305-4ec6-8388-8916580f4fa9" # Lakehouse.Read.All
-                        type = "Scope"
-                    },
-                    @{
-                        id = "cd1718e4-3e09-4381-a6e1-183e245f8613" # Eventhouse.Read.All
-                        type = "Scope"
-                    },
-                    @{
-                        id = "726667b1-01a6-4be4-b04c-e95eae4023a8" # KQLDatabase.ReadWrite.All
-                        type = "Scope"
-                    }
-                )
-            }
-        )
+    requiredResourceAccess = @( # API Permissions
+        @{
+            resourceAppId  = "e406a681-f3d4-42a8-90b6-c2b029497af1" # Azure Storage
+            resourceAccess = @(
+                @{
+                    id   = "03e0da56-190b-40ad-a80c-ea378c433f7f" # user_impersonation
+                    type = "Scope"
+                }
+            )
+        },
+        @{
+            resourceAppId  = "2746ea77-4702-4b45-80ca-3c97e680e8b7" # Azure Data Explorer
+            resourceAccess = @(
+                @{
+                    id   = "00d678f0-da44-4b12-a6d6-c98bcfd1c5fe" # user_impersonation
+                    type = "Scope"
+                }
+            )
+        },
+        @{
+            resourceAppId  = "00000003-0000-0000-c000-000000000000" # Graph
+            resourceAccess = @(
+                @{
+                    id   = "e1fe6dd8-ba31-4d61-89e7-88639da4683d" # User.Read
+                    type = "Scope"
+                }
+            )
+        },
+        @{
+            resourceAppId  = "00000009-0000-0000-c000-000000000000" # PBI Service
+            resourceAccess = @(
+                @{
+                    id   = "7ba630b9-8110-4e27-8d17-81e5f2218787" # Fabric.Extend
+                    type = "Scope"
+                },
+                @{
+                    id   = "b2f1b2fa-f35c-407c-979c-a858a808ba85" # Workspace.Read.All
+                    type = "Scope"
+                },
+                @{
+                    id   = "caf40b1a-f10e-4da1-86e4-5fda17eb2b07" # Item.Execute.ALL
+                    type = "Scope"
+                },
+                @{
+                    id   = "d2bc95fc-440e-4b0e-bafd-97182de7aef5" # Item.Read.All
+                    type = "Scope"
+                },
+                @{
+                    id   = "7a27a256-301d-4359-b77b-c2b759d2e362" # Item.ReadWrite.All
+                    type = "Scope"
+                },
+                @{
+                    id   = "02e8d710-956c-4760-b996-2e83935c2cf5" # Item.Reshare.All
+                    type = "Scope"
+                },
+                @{
+                    id   = "13060bfd-9305-4ec6-8388-8916580f4fa9" # Lakehouse.Read.All
+                    type = "Scope"
+                },
+                @{
+                    id   = "cd1718e4-3e09-4381-a6e1-183e245f8613" # Eventhouse.Read.All
+                    type = "Scope"
+                },
+                @{
+                    id   = "726667b1-01a6-4be4-b04c-e95eae4023a8" # KQLDatabase.ReadWrite.All
+                    type = "Scope"
+                }
+            )
+        }
+    )
 }
 
 # Convert to valid json format (escape the '"')
@@ -268,11 +267,11 @@ $startUtcDateTimeString = $startUtcDateTimeString.ToString('u') -replace ' ', 'T
 $endUtcDateTimeString = $endUtcDateTimeString.ToString('u') -replace ' ', 'T'
 
 $passwordCreds = @{
-  passwordCredential = @{
-    displayName = "SampleSecret"
-    endDateTime = $endUtcDateTimeString
-    startDateTime = $startUtcDateTimeString
-  }
+    passwordCredential = @{
+        displayName   = "SampleSecret"
+        endDateTime   = $endUtcDateTimeString
+        startDateTime = $startUtcDateTimeString
+    }
 }
 
 # Convert to valid json format (escape the '"')

@@ -521,7 +521,7 @@ export async function callItemGet(objectId: string, workloadClient: WorkloadClie
 
         return item;
     } catch (exception) {
-        console.error(`Failed locating item with ObjectID ${objectId}`, exception);
+        console.error('Failed locating item with ObjectID %s', objectId, exception);
         return await handleException(exception, workloadClient, isRetry, false /* isDirectWorkloadCall */, callItemGet, objectId);
     }
 }
@@ -577,7 +577,7 @@ export async function callItemDelete(
         console.log(`Delete result for item ${objectId}: ${result.success}`);
         return result.success;
     } catch (exception) {
-        console.error(`Failed deleting Item ${objectId}`, exception);
+        console.error('Failed deleting Item %s', objectId, exception);
         return await handleException(exception, workloadClient, isRetry, false /* isDirectWorkloadCall */, callItemDelete, objectId);
     }
 }

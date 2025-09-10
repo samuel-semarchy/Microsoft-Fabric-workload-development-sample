@@ -18,6 +18,8 @@
     "CreateHub_Workload_Description":"CreateHub Product Description",
     "CreateHub_Card_1_Title": "Sample Item",
     "CreateHub_Card_1_Description": "Create a Sample Workload Item for your Dev Experience",
+    "CreateHub_Card_2_Title": "Sample Item (Standard)",
+    "CreateHub_Card_2_Description": "Create a Sample Workload Item for your Dev Experience (Standard)",
     "Workload_Hub_Workload_Slogan": "The quickest way from a billion points of data to a point of view.",
     "Workload_Hub_Workload_Description": "Contoso workload enables organizations to conduct real-time customer interactions and automate operational business decisions at scale. It supports a wide variety of customer-facing activities such as personalized marketing and next best action, and customer-impacting decisions including credit services and fraud prevention.",
     "Item_1_DisplayName": "Sample Workload Item",
